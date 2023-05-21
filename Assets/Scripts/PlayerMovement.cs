@@ -9,8 +9,9 @@ public class PlayerMovement : MonoBehaviour
     Vector2 rawInput;
     Vector2 minBound;
     Vector2 maxBound;
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float padding = 1f;
+    [SerializeField] float moveSpeed;
+    [SerializeField] float xPadding;
+    [SerializeField] float yPadding;
 
 
     // Start is called before the first frame update
@@ -24,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movement = rawInput * moveSpeed * Time.deltaTime;
         Vector2 newPos = new Vector2();
-        newPos.x = Mathf.Clamp(transform.position.x + movement.x, minBound.x + padding, maxBound.x - padding);
-        newPos.y = Mathf.Clamp(transform.position.y + movement.y, minBound.y + padding, maxBound.y - padding);
+        newPos.x = Mathf.Clamp(transform.position.x + movement.x, minBound.x + xPadding, maxBound.x - xPadding);
+        newPos.y = Mathf.Clamp(transform.position.y + movement.y, minBound.y + yPadding, maxBound.y - yPadding);
         transform.position = newPos;
     }
 
