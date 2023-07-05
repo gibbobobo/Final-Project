@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
 
     Vector2 rawInput;
@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float xPadding;
     [SerializeField] float yPadding;
+    [SerializeField] GameObject missileProjectile;
+    [SerializeField] GameObject deathExplosion;
 
 
     // Start is called before the first frame update
@@ -42,4 +44,20 @@ public class PlayerMovement : MonoBehaviour
     {
         rawInput = value.Get<Vector2>();
     }
+
+    void OnFire()
+    {
+        Instantiate(missileProjectile, transform.position, Quaternion.identity);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+            Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        }
+    }
+        
+
 }

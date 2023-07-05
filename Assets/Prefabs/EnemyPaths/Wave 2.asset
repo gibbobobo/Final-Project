@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94ba5a4a3187f243a63c1b7f50d8cb6, type: 3}
+  m_Name: Wave 2
+  m_EditorClassIdentifier: 
+  enemyPath: {fileID: 8262090468072194080, guid: be10269b8a3dd6547b47a5676eb2a00a, type: 3}
+  moveSpeed: 3
+  spawnDelay: 0.3
+  waveDelay: 8
+  attackDelay: 0.03
+  fireDelay: 0.7
+  enemyList:
+  - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
+  - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
+  - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
+  - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
+  - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
+  - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
