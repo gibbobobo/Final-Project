@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
         {
             Instantiate(currentWave.GetEnemyPrefab(i),
                         currentWave.GetEnemySpawnPoint().position,
-                        Quaternion.Euler(0f, 180f, 0f) * transform.rotation,
+                        Quaternion.identity,
                         transform);
             yield return new WaitForSeconds(currentWave.GetSpawnDelay());
         }

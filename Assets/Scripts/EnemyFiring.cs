@@ -28,7 +28,7 @@ public class EnemyFiring : MonoBehaviour
             yield return new WaitForSeconds(spawnController.GetFireDelay());
             Instantiate(enemyProjectile,
                         transform.position,
-                        Quaternion.Euler(0f, 180f, 0f) * transform.rotation);
+                        Quaternion.identity);
         }
     }
 }
