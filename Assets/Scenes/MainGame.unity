@@ -179,9 +179,10 @@ GameObject:
   - component: {fileID: 253636269}
   - component: {fileID: 253636272}
   - component: {fileID: 253636271}
+  - component: {fileID: 253636273}
   m_Layer: 0
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3606,6 +3607,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &253636273
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253636268}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
 --- !u!1 &318585568
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,9 +4497,13 @@ PrefabInstance:
       propertyPath: yPadding
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 113037198195059080, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
+      propertyPath: firingRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 113037198195059082, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 113037198195059083, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_RootOrder
@@ -4506,7 +4527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 113037198195059083, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 113037198195059083, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4543,6 +4564,18 @@ PrefabInstance:
     - target: {fileID: 113037198195059087, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512672869043730432, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
+      propertyPath: m_Size.x
+      value: 0.25862208
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512672869043730432, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.020688966
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512672869043730432, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.010000002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}

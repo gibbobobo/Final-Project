@@ -20,6 +20,14 @@ public class ProjectileMovement : MonoBehaviour
         transform.position += movement;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Terrain"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void OnBecameInvisible()
     {
         Destroy(gameObject);

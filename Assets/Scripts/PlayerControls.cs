@@ -9,21 +9,55 @@ public class PlayerControls : MonoBehaviour
     Vector2 rawInput;
     Vector2 minBound;
     Vector2 maxBound;
+    Vector3 spawnPos;
     [SerializeField] float moveSpeed;
     [SerializeField] float xPadding;
     [SerializeField] float yPadding;
+    [SerializeField] float firingRate;
     [SerializeField] GameObject missileProjectile;
     [SerializeField] GameObject deathExplosion;
+    [SerializeField] bool invincible;
 
+    SpriteRenderer spriteRenderer;
+    bool isFiring = false;
+    Coroutine firingCoroutine;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         SetBounds();
+        invincible = false;
+        spawnPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+        if (isFiring && firingCoroutine == null && spriteRenderer.enabled == true)
+        {
+            firingCoroutine = StartCoroutine(Firing());
+        }
+        else if(!isFiring && firingCoroutine != null)
+        {
+            StopCoroutine(firingCoroutine);
+            firingCoroutine = null;
+        }
+    }
+
+    void SetBounds()
+    {
+        Camera mainCamera = Camera.main;
+        minBound = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
+        maxBound = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
+    }
+
+    void Move()
     {
         Vector2 movement = rawInput * moveSpeed * Time.deltaTime;
         Vector2 newPos = new Vector2();
@@ -32,32 +66,56 @@ public class PlayerControls : MonoBehaviour
         transform.position = newPos;
     }
 
-    void SetBounds()
-    {
-        Camera mainCamera = Camera.main;
-        minBound = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
-        maxBound = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
-
-    }
-
     void OnMove(InputValue value)
     {
         rawInput = value.Get<Vector2>();
     }
 
-    void OnFire()
+    void OnFire(InputValue value)
     {
-        Instantiate(missileProjectile, transform.position, Quaternion.identity);
+        isFiring = value.isPressed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && !invincible)
         {
-            Destroy(gameObject);
-            Instantiate(deathExplosion, transform.position, Quaternion.identity);
+            StartCoroutine(Respawn());
         }
     }
-        
+      
+    IEnumerator Firing()
+    {
+        while (true)
+        {
+            if (spriteRenderer.enabled == true)
+            {
+                Instantiate(missileProjectile, transform.position, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(firingRate);
+        }
+    }
+
+    IEnumerator Respawn()
+    {
+        invincible = true;
+        spriteRenderer.enabled = false;
+        Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(2);
+        Vector3 respawnPos = Camera.main.ScreenToWorldPoint(spawnPos);
+            //new Vector3(1, 200, Camera.main.nearClipPlane));
+        transform.position = respawnPos;
+        spriteRenderer.enabled = true;
+        Color oldColor = spriteRenderer.color;
+        Color flashColor = new Color(255, 255, 255, 0.5f);
+        for (var i = 0; i < 10; i++)
+        {
+            spriteRenderer.material.color = flashColor;
+            yield return new WaitForSeconds(0.05f);
+            spriteRenderer.material.color = oldColor;
+            yield return new WaitForSeconds(0.05f);
+        }
+        invincible = false;
+    }
 
 }
