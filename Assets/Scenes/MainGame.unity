@@ -4502,6 +4502,10 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 113037198195059082, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c5ea0a2e12127d408edfbe05c72b00e, type: 3}
+    - target: {fileID: 113037198195059082, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
@@ -4564,6 +4568,10 @@ PrefabInstance:
     - target: {fileID: 113037198195059087, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 650200419107491026, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8512672869043730432, guid: 3d2ce7648f7cf434cb843e7f4f372272, type: 3}
       propertyPath: m_Size.x

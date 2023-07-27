@@ -78,7 +78,7 @@ public class PlayerControls : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && !invincible)
+        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Terrain")) && !invincible)
         {
             StartCoroutine(Respawn());
         }
@@ -103,7 +103,6 @@ public class PlayerControls : MonoBehaviour
         Instantiate(deathExplosion, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(2);
         Vector3 respawnPos = Camera.main.ScreenToWorldPoint(spawnPos);
-            //new Vector3(1, 200, Camera.main.nearClipPlane));
         transform.position = respawnPos;
         spriteRenderer.enabled = true;
         Color oldColor = spriteRenderer.color;
