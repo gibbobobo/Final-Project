@@ -27,7 +27,6 @@ public class Health : MonoBehaviour
         {
             TakeDamage(damage.GetDamage());
             damage.Hit();
-
         }
     }
 
