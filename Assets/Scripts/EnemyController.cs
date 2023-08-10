@@ -7,20 +7,28 @@ public class EnemyController : MonoBehaviour
     SpawnController spawnController;
     List<GameObject> waypoints;
     int index = 1;
+    [SerializeField] int enemyType;
+    [SerializeField] int points;
+    [SerializeField] int health;
     [SerializeField] GameObject enemyProjectile;
     [SerializeField] bool largeEnemy;
+    [SerializeField] GameObject deathExplosion;
     Coroutine firingCoroutine;
     Coroutine enemyDelay;
     float delay;
     float speed;
     WaypointData waypointData;
     bool delayed = false;
+    SpriteRenderer spriteRenderer;
+    UIController uiController;
 
     private void Awake()
     {
         spawnController = GetComponentInParent<SpawnController>();
         waypoints = spawnController.GetWaypoints();
         waypointData = waypoints[index - 1].GetComponent<WaypointData>();
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        uiController = GameObject.Find("Panel").GetComponent<UIController>();
     }
 
     // Start is called before the first frame update
@@ -109,5 +117,41 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(waypointData.GetMoveDelay());
         delayed = false;
         enemyDelay = null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Damage damage = collision.GetComponent<Damage>();
+
+        if (damage != null)
+        {
+            TakeDamage(damage.GetDamage());
+            damage.Hit();
+        }
+    }
+
+    void TakeDamage(int damage)
+    {
+        StartCoroutine(Flash());
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            Instantiate(deathExplosion, transform.position, Quaternion.identity);
+            uiController.UpdateScore(enemyType, points);
+        }
+    }
+
+    IEnumerator Flash()
+    {
+        Color oldColor = spriteRenderer.color;
+        Color flashColor = new Color(255, 255, 255, 0.5f);
+        for (var i = 0; i < 2; i++)
+        {
+            spriteRenderer.material.color = flashColor;
+            yield return new WaitForSeconds(0.05f);
+            spriteRenderer.material.color = oldColor;
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }

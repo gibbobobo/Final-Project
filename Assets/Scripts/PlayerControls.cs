@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -17,14 +18,19 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] GameObject missileProjectile;
     [SerializeField] GameObject deathExplosion;
     [SerializeField] bool invincible;
-
+    [SerializeField] GameObject gameOverText;
+    int playerLives;
+    UIController uiController;
     SpriteRenderer spriteRenderer;
     bool isFiring = false;
     Coroutine firingCoroutine;
+    LevelManager levelManager;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        uiController = GameObject.Find("Panel").GetComponent<UIController>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     // Start is called before the first frame update
@@ -32,6 +38,7 @@ public class PlayerControls : MonoBehaviour
     {
         SetBounds();
         invincible = false;
+        playerLives = 3;
         spawnPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
     }
 
@@ -80,7 +87,19 @@ public class PlayerControls : MonoBehaviour
     {
         if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Terrain")) && !invincible)
         {
-            StartCoroutine(Respawn());
+            playerLives -= 1;
+            uiController.UpdateLives(playerLives);
+            invincible = true;
+            spriteRenderer.enabled = false;
+            Instantiate(deathExplosion, transform.position, Quaternion.identity);
+            if (playerLives > 0)
+            {
+                StartCoroutine(Respawn());
+            }
+            else
+            {
+                StartCoroutine(GameOver());
+            }
         }
     }
       
@@ -98,10 +117,8 @@ public class PlayerControls : MonoBehaviour
 
     IEnumerator Respawn()
     {
-        invincible = true;
-        spriteRenderer.enabled = false;
-        Instantiate(deathExplosion, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(2);
+        uiController.ResetStreak();
         Vector3 respawnPos = Camera.main.ScreenToWorldPoint(spawnPos);
         transform.position = respawnPos;
         spriteRenderer.enabled = true;
@@ -115,6 +132,13 @@ public class PlayerControls : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         invincible = false;
+    }
+
+    IEnumerator GameOver()
+    {
+        gameOverText.GetComponent<TextMeshProUGUI>().enabled = true;
+        yield return new WaitForSeconds(3.0f);
+        levelManager.LoadGameOver();
     }
 
 }

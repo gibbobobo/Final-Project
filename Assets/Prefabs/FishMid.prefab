@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 50051937484235604}
   - component: {fileID: 95589756580555454}
   - component: {fileID: -8297940659603044044}
-  - component: {fileID: 7805943379745766668}
   m_Layer: 0
   m_Name: FishMid
   m_TagString: Enemy
@@ -159,18 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e520aaa87237d8549925de49244cc920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyProjectile: {fileID: 6745230232779011532, guid: 81e445c40afbe114bbf2bfd2a97715ac, type: 3}
---- !u!114 &7805943379745766668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1849596494334278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: badbc67080de8d346bcb4ed263b265a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  enemyType: 2
+  points: 10
   health: 10
+  enemyProjectile: {fileID: 6745230232779011532, guid: 81e445c40afbe114bbf2bfd2a97715ac, type: 3}
+  largeEnemy: 0
   deathExplosion: {fileID: 1820545851295154, guid: b22a24e39bda14f3bb2b1feb1d07ee14, type: 3}
