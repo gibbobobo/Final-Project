@@ -83,23 +83,36 @@ public class PlayerControls : MonoBehaviour
         isFiring = value.isPressed;
     }
 
+    void TakeDamage(int damage)
+    {
+        if (damage > 0)
+        {
+            PlayerHit();
+        }
+    }
+
+    void PlayerHit()
+    {
+        playerLives -= 1;
+        uiController.UpdateLives(playerLives);
+        invincible = true;
+        spriteRenderer.enabled = false;
+        Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        if (playerLives > 0)
+        {
+            StartCoroutine(Respawn());
+        }
+        else
+        {
+            StartCoroutine(GameOver());
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Terrain")) && !invincible)
         {
-            playerLives -= 1;
-            uiController.UpdateLives(playerLives);
-            invincible = true;
-            spriteRenderer.enabled = false;
-            Instantiate(deathExplosion, transform.position, Quaternion.identity);
-            if (playerLives > 0)
-            {
-                StartCoroutine(Respawn());
-            }
-            else
-            {
-                StartCoroutine(GameOver());
-            }
+            PlayerHit();
         }
     }
       

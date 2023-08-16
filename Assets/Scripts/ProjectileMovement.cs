@@ -16,8 +16,6 @@ public class ProjectileMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Vector3 movement = new Vector2(moveSpeed * Time.deltaTime, 0);
-        //transform.position += movement;
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
     }
 
@@ -32,5 +30,13 @@ public class ProjectileMovement : MonoBehaviour
     void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    void TakeDamage(int damage)
+    {
+        if (damage > 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
