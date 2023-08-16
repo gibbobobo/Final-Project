@@ -11,9 +11,9 @@ public class PlayerControls : MonoBehaviour
     Vector2 minBound;
     Vector2 maxBound;
     Vector3 spawnPos;
+    float xPadding;
+    float yPadding;
     [SerializeField] float moveSpeed;
-    [SerializeField] float xPadding;
-    [SerializeField] float yPadding;
     [SerializeField] float firingRate;
     [SerializeField] GameObject missileProjectile;
     [SerializeField] GameObject deathExplosion;
@@ -22,14 +22,14 @@ public class PlayerControls : MonoBehaviour
     int playerLives;
     UIController uiController;
     SpriteRenderer spriteRenderer;
-    bool isFiring = false;
+    bool isFiring;
     Coroutine firingCoroutine;
     LevelManager levelManager;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
-        uiController = GameObject.Find("Panel").GetComponent<UIController>();
+        uiController = GameObject.Find("UI Panel").GetComponent<UIController>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
@@ -38,6 +38,7 @@ public class PlayerControls : MonoBehaviour
     {
         SetBounds();
         invincible = false;
+        isFiring = false;
         playerLives = 3;
         spawnPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
     }
@@ -62,6 +63,8 @@ public class PlayerControls : MonoBehaviour
         Camera mainCamera = Camera.main;
         minBound = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
         maxBound = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
+        xPadding = mainCamera.orthographicSize * 2f * 0.06f;
+        yPadding = mainCamera.orthographicSize * mainCamera.aspect * 0.06f;
     }
 
     void Move()
@@ -122,7 +125,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (spriteRenderer.enabled == true)
             {
-                Instantiate(missileProjectile, transform.position, Quaternion.identity);
+                Instantiate(missileProjectile, transform.position + new Vector3(0,-0.15f,0), Quaternion.identity);
             }
             yield return new WaitForSeconds(firingRate);
         }

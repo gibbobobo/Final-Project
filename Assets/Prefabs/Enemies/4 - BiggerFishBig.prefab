@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 50066830953986102}
   - component: {fileID: 1858402262270066606}
   m_Layer: 0
-  m_Name: FishBig
+  m_Name: 4 - BiggerFishBig
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1788738869386804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -158,9 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e520aaa87237d8549925de49244cc920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 1
-  points: 25
-  health: 20
+  enemyType: 4
+  points: 200
+  health: 100
   enemyProjectile: {fileID: 5756947593285981517, guid: f8089274a119e0445b974132d9da7d92, type: 3}
-  largeEnemy: 0
-  deathExplosion: {fileID: 1820545851295154, guid: b22a24e39bda14f3bb2b1feb1d07ee14, type: 3}
+  largeEnemy: 1
+  deathExplosion: {fileID: 1820545851295154, guid: 9136d16367fbba84798cd0edc2bee49d, type: 3}

@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
         waypoints = spawnController.GetWaypoints();
         waypointData = waypoints[index - 1].GetComponent<WaypointData>();
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
-        uiController = GameObject.Find("Panel").GetComponent<UIController>();
+        uiController = GameObject.Find("UI Panel").GetComponent<UIController>();
     }
 
     // Start is called before the first frame update
