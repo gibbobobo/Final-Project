@@ -19,4 +19,9 @@ public class Scroll : MonoBehaviour
         Vector3 movement = new Vector2(moveSpeed * Time.deltaTime, 0);
         transform.position -= movement;
     }
+
+    public void SetScroll(float speed)
+    {
+        moveSpeed = speed;
+    }
 }

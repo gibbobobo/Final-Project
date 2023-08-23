@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5988635187144103371}
   - component: {fileID: 5988635187144103370}
   - component: {fileID: 5988635187144103369}
-  - component: {fileID: -1715590676031575123}
   m_Layer: 0
   m_Name: MissleProjectile
   m_TagString: Untagged
@@ -160,16 +159,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
---- !u!114 &-1715590676031575123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5988635187144103368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31658767b5ff624396adf6c138a8e63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   damage: 10

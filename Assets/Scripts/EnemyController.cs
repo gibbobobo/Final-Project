@@ -102,10 +102,10 @@ public class EnemyController : MonoBehaviour
             {
                 Instantiate(enemyProjectile,
                        transform.position,
-                       Quaternion.Euler(new Vector3(0,0,22.5f)));
+                       Quaternion.Euler(new Vector3(0,0,10f)));
                 Instantiate(enemyProjectile,
                        transform.position,
-                       Quaternion.Euler(new Vector3(0, 0, -22.5f)));
+                       Quaternion.Euler(new Vector3(0, 0, -10f)));
             }
             yield return new WaitForSeconds(delay);
         }
@@ -121,12 +121,12 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Damage damage = collision.GetComponent<Damage>();
-
-        if (damage != null)
+        ProjectileController projectile = collision.GetComponent<ProjectileController>();
+        
+        if (projectile != null && !projectile.gameObject.CompareTag("Enemy"))
         {
-            TakeDamage(damage.GetDamage());
-            damage.Hit();
+            TakeDamage(projectile.GetDamage());
+            projectile.Hit();
         }
     }
 

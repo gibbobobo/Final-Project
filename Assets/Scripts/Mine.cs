@@ -24,15 +24,18 @@ public class Mine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Damage damage = collision.GetComponent<Damage>();
+        ProjectileController projectile = collision.GetComponent<ProjectileController>();
+        PlayerControls player = collision.GetComponent<PlayerControls>();
 
-        if (damage != null)
+        if (projectile != null)
         {
-            Destroy(gameObject);
-            centre = transform.position + offset;
-            Instantiate(explosion, centre, Quaternion.identity);
-            damage.Hit();
-            ExplosionDamage();
+            projectile.Hit();
+            DestroyMine();
+        }
+        else if (collision.gameObject.CompareTag("Player") && !player.IsInvincible())
+        {
+            player.PlayerHit();
+            DestroyMine();
         }
     }
 
@@ -44,5 +47,13 @@ public class Mine : MonoBehaviour
         {
             hitcollider.gameObject.SendMessage("TakeDamage", 100);    
         }
+    }
+
+    void DestroyMine()
+    {
+        Destroy(gameObject);
+        centre = transform.position + offset;
+        Instantiate(explosion, centre, Quaternion.identity);
+        ExplosionDamage();
     }
 }

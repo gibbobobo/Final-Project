@@ -26,4 +26,9 @@ public class BackgroundScroll : MonoBehaviour
         }
         
     }
+
+    public void StopScroll()
+    {
+        moveSpeed = 0;
+    }
 }

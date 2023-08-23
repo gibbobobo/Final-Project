@@ -19,12 +19,15 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] GameObject deathExplosion;
     [SerializeField] bool invincible;
     [SerializeField] GameObject gameOverText;
+    [SerializeField] GameObject spawnList;
     int playerLives;
     UIController uiController;
     SpriteRenderer spriteRenderer;
     bool isFiring;
     Coroutine firingCoroutine;
     LevelManager levelManager;
+    List<GameObject> spawnPoints = new List<GameObject>();
+    int spawnIndex;
 
     private void Awake()
     {
@@ -40,7 +43,7 @@ public class PlayerControls : MonoBehaviour
         invincible = false;
         isFiring = false;
         playerLives = 3;
-        spawnPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        GetSpawnPoints();
     }
 
     // Update is called once per frame
@@ -56,6 +59,22 @@ public class PlayerControls : MonoBehaviour
             StopCoroutine(firingCoroutine);
             firingCoroutine = null;
         }
+        Vector3 nextSpawn = Camera.main.WorldToScreenPoint(spawnList.transform.GetChild(spawnIndex + 1).position);
+        if (nextSpawn.x < spawnPos.x)
+        {
+            spawnPos = Camera.main.WorldToScreenPoint(spawnList.transform.GetChild(spawnIndex + 1).position);
+            spawnIndex += 1;
+        }
+    }
+
+    void GetSpawnPoints()
+    {
+        foreach (Transform child in spawnList.transform)
+        {
+            spawnPoints.Add(child.gameObject);
+        }
+        spawnIndex = 0;
+        spawnPos = Camera.main.WorldToScreenPoint(spawnList.transform.GetChild(0).position);
     }
 
     void SetBounds()
@@ -88,13 +107,13 @@ public class PlayerControls : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        if (damage > 0)
+        if (damage > 0 && !invincible)
         {
             PlayerHit();
         }
     }
 
-    void PlayerHit()
+    public void PlayerHit()
     {
         playerLives -= 1;
         uiController.UpdateLives(playerLives);
@@ -116,6 +135,11 @@ public class PlayerControls : MonoBehaviour
         if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Terrain")) && !invincible)
         {
             PlayerHit();
+        }
+        else if (collision.gameObject.CompareTag("Terrain") && invincible)
+        {
+            Vector3 respawnPos = Camera.main.ScreenToWorldPoint(spawnPos);
+            transform.position = respawnPos;
         }
     }
       
@@ -157,4 +181,8 @@ public class PlayerControls : MonoBehaviour
         levelManager.LoadGameOver();
     }
 
+    public bool IsInvincible()
+    {
+        return invincible;
+    }
 }
