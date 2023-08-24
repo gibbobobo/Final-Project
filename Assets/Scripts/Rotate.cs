@@ -19,7 +19,6 @@ public class Rotate : MonoBehaviour
     void Update()
     {
         transform.Rotate(0, 0, moveSpeed * Time.deltaTime);
-        Debug.Log(gameObject.transform.rotation.eulerAngles.z);
         if (gameObject.transform.rotation.eulerAngles.z <= inside  && !reverse)
         {
             moveSpeed = -moveSpeed;

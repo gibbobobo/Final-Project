@@ -8,14 +8,18 @@ public class ScrollChanger : MonoBehaviour
     Scroll scroll;
     BackgroundScroll bgScroll1;
     BackgroundScroll bgScroll2;
+    BackgroundScroll bgScroll3;
+    BossController boss;
     Vector3 screenPos;
     bool passed;
 
     private void Awake()
     {
         scroll = GameObject.Find("Scrolling Level").GetComponent<Scroll>();
-        bgScroll1 = GameObject.Find("Background").GetComponent<BackgroundScroll>();
-        bgScroll2 = GameObject.Find("MidBackground").GetComponent<BackgroundScroll>();
+        bgScroll1 = GameObject.Find("Background (0)").GetComponent<BackgroundScroll>();
+        bgScroll2 = GameObject.Find("Background (1)").GetComponent<BackgroundScroll>();
+        bgScroll3 = GameObject.Find("Background (2)").GetComponent<BackgroundScroll>();
+        boss = GameObject.Find("BossBody").GetComponent<BossController>();
     }
 
     // Start is called before the first frame update
@@ -36,6 +40,8 @@ public class ScrollChanger : MonoBehaviour
             {
                 bgScroll1.StopScroll();
                 bgScroll2.StopScroll();
+                bgScroll3.StopScroll();
+                boss.Activate();
             }
         }
     }

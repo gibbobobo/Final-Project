@@ -131,13 +131,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  xPadding: 0.6
-  yPadding: 0.4
   firingRate: 0.2
   missileProjectile: {fileID: 5988635187144103368, guid: 4f828a4b4ead9204bbb0d52121e770ca, type: 3}
   deathExplosion: {fileID: 8873104711932262170, guid: 6f2d32ce90acf11468ba40ee2bc9acaf, type: 3}
   invincible: 0
   gameOverText: {fileID: 0}
+  spawnList: {fileID: 2466303566084104904, guid: 113b6d08e3f6c9a4a9391eb7f94c61c8, type: 3}
 --- !u!50 &4218488781901492159
 Rigidbody2D:
   serializedVersion: 4
@@ -157,7 +156,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!70 &7194530209039123799
 CapsuleCollider2D:

@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] GameObject enemyProjectile;
     [SerializeField] bool largeEnemy;
     [SerializeField] GameObject deathExplosion;
+    [SerializeField] bool immune;
     Coroutine firingCoroutine;
     Coroutine enemyDelay;
     float delay;
@@ -123,7 +124,7 @@ public class EnemyController : MonoBehaviour
     {
         ProjectileController projectile = collision.GetComponent<ProjectileController>();
         
-        if (projectile != null && !projectile.gameObject.CompareTag("Enemy"))
+        if (projectile != null && !projectile.gameObject.CompareTag("Enemy") && !immune)
         {
             TakeDamage(projectile.GetDamage());
             projectile.Hit();

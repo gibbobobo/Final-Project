@@ -18,8 +18,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] GameObject missileProjectile;
     [SerializeField] GameObject deathExplosion;
     [SerializeField] bool invincible;
-    [SerializeField] GameObject gameOverText;
-    [SerializeField] GameObject spawnList;
+    GameObject gameOverText;
+    GameObject spawnList;
     int playerLives;
     UIController uiController;
     SpriteRenderer spriteRenderer;
@@ -34,6 +34,8 @@ public class PlayerControls : MonoBehaviour
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
         uiController = GameObject.Find("UI Panel").GetComponent<UIController>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        gameOverText = GameObject.Find("Game Over (TMP)");
+        spawnList = GameObject.Find("SpawnPoints");
     }
 
     // Start is called before the first frame update

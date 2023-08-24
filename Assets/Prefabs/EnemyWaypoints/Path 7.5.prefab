@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
   moveDelay: 1
-  fireDelay: 0.3
+  fireDelay: 0.5
   attacking: 1
 --- !u!1 &4999840423993899794
 GameObject:
@@ -142,8 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   moveDelay: 0
-  fireDelay: 0
-  attacking: 0
+  fireDelay: 0.5
+  attacking: 1
 --- !u!1 &4999840424325029518
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
   moveDelay: 1
-  fireDelay: 0.3
+  fireDelay: 0.5
   attacking: 1
 --- !u!1 &4999840424810337889
 GameObject:
@@ -323,5 +323,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   moveDelay: 1
-  fireDelay: 0.3
+  fireDelay: 0.5
   attacking: 1
