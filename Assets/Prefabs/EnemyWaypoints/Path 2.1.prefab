@@ -329,7 +329,7 @@ MonoBehaviour:
   moveSpeed: 5
   moveDelay: 0
   fireDelay: 0.1
-  attacking: 1
+  attacking: 0
 --- !u!1 &3654830615199700926
 GameObject:
   m_ObjectHideFlags: 0
