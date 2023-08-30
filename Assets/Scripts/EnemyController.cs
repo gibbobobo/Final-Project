@@ -135,7 +135,7 @@ public class EnemyController : MonoBehaviour
     {
         StartCoroutine(Flash());
         health -= damage;
-        if (health <= 0)
+        if (health == 0)
         {
             Destroy(gameObject);
             Instantiate(deathExplosion, transform.position, Quaternion.identity);

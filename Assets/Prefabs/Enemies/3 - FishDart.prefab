@@ -160,7 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 3
   points: 10
-  health: 10
+  health: 20
   enemyProjectile: {fileID: 6959121245025469002, guid: e09de0073f8d7dd429a7b3023fb2228b, type: 3}
   largeEnemy: 0
   deathExplosion: {fileID: 1820545851295154, guid: b22a24e39bda14f3bb2b1feb1d07ee14, type: 3}
+  immune: 0

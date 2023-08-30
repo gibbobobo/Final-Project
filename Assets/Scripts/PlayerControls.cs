@@ -18,6 +18,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] GameObject missileProjectile;
     [SerializeField] GameObject deathExplosion;
     [SerializeField] bool invincible;
+    [SerializeField] int powerLevel;
     GameObject gameOverText;
     GameObject spawnList;
     int playerLives;
@@ -45,6 +46,9 @@ public class PlayerControls : MonoBehaviour
         invincible = false;
         isFiring = false;
         playerLives = 3;
+        powerLevel = 0;
+        firingRate = 0.2f;
+        moveSpeed = 5;
         GetSpawnPoints();
     }
 
@@ -143,6 +147,28 @@ public class PlayerControls : MonoBehaviour
             Vector3 respawnPos = Camera.main.ScreenToWorldPoint(spawnPos);
             transform.position = respawnPos;
         }
+        else if (collision.gameObject.CompareTag("PowerUP"))
+        {
+            PowerUp PU = collision.GetComponent<PowerUp>();
+            Debug.Log("Hit!");
+            switch (PU.type)
+            {
+                case 0:
+                    powerLevel += 1;
+                    break;
+                case 1:
+                    playerLives += 1;
+                    uiController.UpdateLives(playerLives);
+                    break;
+                case 2:
+                    firingRate -= 0.05f;
+                    break;
+                case 3:
+                    moveSpeed += 1;
+                    break;
+            }
+            Destroy(collision.gameObject);
+        }
     }
       
     IEnumerator Firing()
@@ -151,7 +177,23 @@ public class PlayerControls : MonoBehaviour
         {
             if (spriteRenderer.enabled == true)
             {
-                Instantiate(missileProjectile, transform.position + new Vector3(0,-0.15f,0), Quaternion.identity);
+                switch (powerLevel)
+                {
+                    case 0:
+                        Instantiate(missileProjectile, transform.position + new Vector3(0, -0.15f, 0), Quaternion.identity);
+                        break;
+                    case 1:
+                        Instantiate(missileProjectile, transform.position + new Vector3(0, 0f, 0), Quaternion.identity);
+                        Instantiate(missileProjectile, transform.position + new Vector3(0, -0.2f, 0), Quaternion.identity);
+                        break;
+                    case 2:
+                        Instantiate(missileProjectile, transform.position + new Vector3(0, 0f, 0), Quaternion.identity);
+                        Instantiate(missileProjectile, transform.position + new Vector3(0, -0.2f, 0), Quaternion.identity);
+                        Instantiate(missileProjectile, transform.position + new Vector3(0, -0.2f, 0), Quaternion.Euler(new Vector3(0, 0, -5f)));
+                        Instantiate(missileProjectile, transform.position + new Vector3(0, 0f, 0), Quaternion.Euler(new Vector3(0, 0, 5f)));
+                        break;
+                }
+                
             }
             yield return new WaitForSeconds(firingRate);
         }
