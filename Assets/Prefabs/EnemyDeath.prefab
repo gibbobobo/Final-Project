@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 212114052107899372}
   - component: {fileID: 95252196718087656}
   - component: {fileID: 9083260176781722206}
-  - component: {fileID: 5707019383843877159}
   - component: {fileID: -3561237808400247642}
   m_Layer: 0
   m_Name: EnemyDeath
@@ -121,19 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e98eaa0906281e44aa5b69892494139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5707019383843877159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1820545851295154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9435924cf9c201b49aa384db615cf7c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
 --- !u!82 &-3561237808400247642
 AudioSource:
   m_ObjectHideFlags: 0

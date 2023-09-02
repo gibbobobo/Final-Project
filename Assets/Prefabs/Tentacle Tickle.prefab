@@ -165,7 +165,10 @@ MonoBehaviour:
   - {fileID: 400394392458897920}
   - {fileID: 400394392458897921}
   currentColliderIndex: 0
-  anim: {fileID: 0}
+  movespeed: 3
+  active: 0
+  moveDist: {x: 0, y: 4, z: 0}
+  top: 0
 --- !u!60 &400394392458897973
 PolygonCollider2D:
   m_ObjectHideFlags: 0

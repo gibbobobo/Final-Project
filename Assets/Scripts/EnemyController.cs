@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] bool immune;
     Coroutine firingCoroutine;
     Coroutine enemyDelay;
+    Coroutine damaged;
     float delay;
     float speed;
     WaypointData waypointData;
@@ -126,21 +127,23 @@ public class EnemyController : MonoBehaviour
         
         if (projectile != null && !projectile.gameObject.CompareTag("Enemy") && !immune)
         {
-            TakeDamage(projectile.GetDamage());
+            if (damaged == null) damaged = StartCoroutine(TakeDamage(projectile.GetDamage()));
+            StartCoroutine(Flash());
             projectile.Hit();
         }
     }
 
-    void TakeDamage(int damage)
+    IEnumerator TakeDamage(int damage)
     {
-        StartCoroutine(Flash());
         health -= damage;
-        if (health == 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
-            Instantiate(deathExplosion, transform.position, Quaternion.identity);
+            Instantiate(deathExplosion, transform.position, Quaternion.identity, GameObject.Find("Scrolling Level").transform);
             uiController.UpdateScore(enemyType, points);
         }
+        yield return new WaitForSeconds(0.01f);
+        damaged = null;
     }
 
     IEnumerator Flash()

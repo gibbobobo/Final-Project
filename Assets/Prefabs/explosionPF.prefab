@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8873104711932262180}
   - component: {fileID: 8873104711932262181}
   - component: {fileID: 8205421422141796296}
-  - component: {fileID: -3779513435227907334}
   - component: {fileID: -7984627070834200632}
   m_Layer: 0
   m_Name: explosionPF
@@ -121,19 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e98eaa0906281e44aa5b69892494139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3779513435227907334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8873104711932262170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9435924cf9c201b49aa384db615cf7c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
 --- !u!82 &-7984627070834200632
 AudioSource:
   m_ObjectHideFlags: 0

@@ -11,25 +11,33 @@ public class BossController : MonoBehaviour
     [SerializeField] GameObject enemyProjectile;
     [SerializeField] float fireDelay;
     [SerializeField] GameObject deathExplosion;
-    bool isActive;
+    [SerializeField] List<GameObject> tentacles;
+    public bool isActive;
     SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRendererClaw1;
+    SpriteRenderer spriteRendererClaw2;
     UIController uiController;
     LevelManager levelManager;
-    GameObject gameOverText;
+    GameObject victoryText;
     Coroutine firingCoroutine;
+    Coroutine tentacleCoroutine;
+    int tentacleIndex;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        spriteRendererClaw1 = GameObject.Find("LegTop").GetComponent<SpriteRenderer>();
+        spriteRendererClaw2 = GameObject.Find("LegBottom").GetComponent<SpriteRenderer>();
         uiController = GameObject.Find("UI Panel").GetComponent<UIController>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        gameOverText = GameObject.Find("Game Over (TMP)");
+        victoryText = GameObject.Find("Victory (TMP)");
     }
 
     // Start is called before the first frame update
     void Start()
     {
         isActive = false;
+        tentacleIndex = 0;
     }
 
     // Update is called once per frame
@@ -40,6 +48,10 @@ public class BossController : MonoBehaviour
             if (firingCoroutine == null)
             {
                 firingCoroutine = StartCoroutine(EnemyFire(fireDelay));
+            }
+            if (tentacleCoroutine == null)
+            {
+                tentacleCoroutine = StartCoroutine(TentacleAttack());
             }
         }
     }
@@ -62,11 +74,13 @@ public class BossController : MonoBehaviour
         if (health <= 0)
         {
             spriteRenderer.enabled = false;
+            spriteRendererClaw1.enabled = false;
+            spriteRendererClaw2.enabled = false;
+            isActive = false;
             StopCoroutine(firingCoroutine);
-            Instantiate(deathExplosion, transform.position, Quaternion.identity);
+            Instantiate(deathExplosion, transform.position, Quaternion.identity, transform.parent);
             uiController.UpdateScore(enemyType, points);
-            StartCoroutine(GameOver());
-            
+            StartCoroutine(Victory());       
         }
     }
 
@@ -84,10 +98,10 @@ public class BossController : MonoBehaviour
         }
     }
 
-    IEnumerator GameOver()
+    IEnumerator Victory()
     {
         yield return new WaitForSeconds(3.0f);
-        gameOverText.GetComponent<TextMeshProUGUI>().enabled = true;
+        victoryText.GetComponent<TextMeshProUGUI>().enabled = true;
         yield return new WaitForSeconds(3.0f);
         levelManager.LoadGameOver();
     }
@@ -106,11 +120,29 @@ public class BossController : MonoBehaviour
                         Quaternion.identity);
             Instantiate(enemyProjectile,
                        transform.position,
-                       Quaternion.Euler(new Vector3(0, 0, 5f)));
+                       Quaternion.Euler(new Vector3(0, 0, 4f)));
             Instantiate(enemyProjectile,
                        transform.position,
-                       Quaternion.Euler(new Vector3(0, 0, -5f)));
+                       Quaternion.Euler(new Vector3(0, 0, -4f)));
+            Instantiate(enemyProjectile,
+                       transform.position,
+                       Quaternion.Euler(new Vector3(0, 0, 8f)));
+            Instantiate(enemyProjectile,
+                       transform.position,
+                       Quaternion.Euler(new Vector3(0, 0, -8f)));
             yield return new WaitForSeconds(delay);
         }
+    }
+
+    IEnumerator TentacleAttack()
+    {
+        Tentaclecontroller tentacle1 = tentacles[tentacleIndex].GetComponent<Tentaclecontroller>();
+        tentacle1.Activate();
+        Tentaclecontroller tentacle2 = tentacles[tentacleIndex+3].GetComponent<Tentaclecontroller>();
+        tentacle2.Activate();
+        tentacleIndex++;
+        if (tentacleIndex == 3) tentacleIndex = 0;
+        yield return new WaitForSeconds(2.5f);
+        tentacleCoroutine = null;
     }
 }

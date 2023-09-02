@@ -8,6 +8,12 @@ public class Rotate : MonoBehaviour
     [SerializeField] bool reverse;
     [SerializeField] float inside;
     [SerializeField] float outside;
+    BossController bossController;
+
+    private void Awake()
+    {
+        bossController = GameObject.Find("BossBody").GetComponent<BossController>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +24,19 @@ public class Rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, 0, moveSpeed * Time.deltaTime);
-        if (gameObject.transform.rotation.eulerAngles.z <= inside  && !reverse)
+        if (bossController.isActive)
         {
-            moveSpeed = -moveSpeed;
-            reverse = !reverse;
-        }
-        if (gameObject.transform.rotation.eulerAngles.z >= outside && reverse)
-        {
-            moveSpeed = -moveSpeed;
-            reverse = !reverse;
+            transform.Rotate(0, 0, moveSpeed * Time.deltaTime);
+            if (gameObject.transform.rotation.eulerAngles.z <= inside && !reverse)
+            {
+                moveSpeed = -moveSpeed;
+                reverse = !reverse;
+            }
+            if (gameObject.transform.rotation.eulerAngles.z >= outside && reverse)
+            {
+                moveSpeed = -moveSpeed;
+                reverse = !reverse;
+            }
         }
     }
 }

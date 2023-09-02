@@ -125,7 +125,7 @@ public class PlayerControls : MonoBehaviour
         uiController.UpdateLives(playerLives);
         invincible = true;
         spriteRenderer.enabled = false;
-        Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        Instantiate(deathExplosion, transform.position, Quaternion.identity, GameObject.Find("Scrolling Level").transform);
         if (playerLives > 0)
         {
             StartCoroutine(Respawn());

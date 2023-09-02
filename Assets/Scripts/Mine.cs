@@ -45,7 +45,7 @@ public class Mine : MonoBehaviour
         
         foreach (var hitcollider in colliders)
         {
-            hitcollider.gameObject.SendMessage("TakeDamage", 100);    
+            hitcollider.gameObject.SendMessage("TakeDamage", 150);    
         }
     }
 
@@ -53,7 +53,7 @@ public class Mine : MonoBehaviour
     {
         Destroy(gameObject);
         centre = transform.position + offset;
-        Instantiate(explosion, centre, Quaternion.identity);
+        Instantiate(explosion, centre, Quaternion.identity, transform.parent);
         ExplosionDamage();
     }
 }
