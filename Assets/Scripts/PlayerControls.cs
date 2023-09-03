@@ -147,10 +147,9 @@ public class PlayerControls : MonoBehaviour
             Vector3 respawnPos = Camera.main.ScreenToWorldPoint(spawnPos);
             transform.position = respawnPos;
         }
-        else if (collision.gameObject.CompareTag("PowerUP"))
+        else if (collision.gameObject.CompareTag("PowerUP") && spriteRenderer.enabled)
         {
             PowerUp PU = collision.GetComponent<PowerUp>();
-            Debug.Log("Hit!");
             switch (PU.type)
             {
                 case 0:
@@ -222,7 +221,8 @@ public class PlayerControls : MonoBehaviour
     {
         gameOverText.GetComponent<TextMeshProUGUI>().enabled = true;
         yield return new WaitForSeconds(3.0f);
-        levelManager.LoadGameOver();
+        TitleScreen.gameOver = true;
+        levelManager.LoadMainMenu();
     }
 
     public bool IsInvincible()

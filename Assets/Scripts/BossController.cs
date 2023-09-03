@@ -103,7 +103,8 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         victoryText.GetComponent<TextMeshProUGUI>().enabled = true;
         yield return new WaitForSeconds(3.0f);
-        levelManager.LoadGameOver();
+        TitleScreen.gameOver = true;
+        levelManager.LoadMainMenu();
     }
 
     public void Activate()

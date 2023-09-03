@@ -14,15 +14,4 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-
-    public void LoadGameOver()
-    {
-        SceneManager.LoadScene("GameOver");
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Quit Game.");
-        Application.Quit();
-    }
 }

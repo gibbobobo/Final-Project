@@ -9,7 +9,7 @@ public class ScoreController : MonoBehaviour
     [SerializeField] GameObject scoreText;
 
     public static int score;
-
+   
     void Update()
     {
         scoreText.GetComponent<TextMeshProUGUI>().text = score.ToString();

@@ -640,7 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPath: {fileID: 3947456057491689040, guid: 0d07c2c9a370e2b41a3df8a451c0e295, type: 3}
   spawnDelay: 0.5
-  waveDelay: 37.75
+  waveDelay: 37
   enemyList:
   - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
   - {fileID: 1788738869386804, guid: b403401433aab3740b39b3f596caca1e, type: 3}
@@ -12393,7 +12393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPath: {fileID: 3947456057491689040, guid: e3ab665dffe71f044af4f4757d01c7dc, type: 3}
   spawnDelay: 0.4
-  waveDelay: 35.4
+  waveDelay: 35
   enemyList:
   - {fileID: 1225044215565552, guid: c231678582e304fdcb4f4b47b37c2264, type: 3}
   - {fileID: 1225044215565552, guid: c231678582e304fdcb4f4b47b37c2264, type: 3}
@@ -21261,7 +21261,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.75
+  m_fontSize: 40.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22685,6 +22685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
+  repeater: 0
 --- !u!1 &1965653644
 GameObject:
   m_ObjectHideFlags: 0
@@ -23012,7 +23013,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.75
+  m_fontSize: 40.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
